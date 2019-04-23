@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Guest Number</title>
+	<link rel="stylesheet" type="text/css" href="guest.css">
+	<link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+</head>
+<body>
+	<div id="app">
+		<div id="menu">
+			<div class="menu-container">
+				<div class="menu-title">
+					Guest Number
+				</div>
+				<div class="menu-item history-score">
+					history
+				</div>
+				<div class="menu-item play-game" @click="changeZIndexTo('menu', -1);">
+					play!
+				</div>
+			</div>
+		</div>
+		<div id="game">
+			<div class="fireworks" v-if="isWin">
+				You Win The Game!
+			</div>
+			<div class="header">
+				<div class="home-btn" @click="changeZIndexTo('menu', 2);"></div>
+				<div class="header-title">
+					<!-- {{ lucky }}<br> -->
+					Guess
+				</div>
+				<div class="header-content">
+					guess count: {{ guessCount }}<br>
+					<input type="text" maxlength="4" size="4" v-model="userInput">
+					<!-- 預計用一個填，每個數字中間用style 隔開，在設計個倒退鍵(可選)-->
+					<button @click="generateResult">go</button>
+				</div>
+				<div class="error-message" v-if="isError">
+					non correct number
+				</div>
+			</div>
+			<div class="user-history">
+				<div v-for="item in this.userList">
+					{{ item.guest }} {{ item.result }}
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="https://unpkg.com/vue"></script>
+	<script type="text/javascript">
+		var app = new Vue({
+			el: '#app',
+			data: {
+				lucky: '0000',
+				guessCount: 0,
+				userInput: '',
+				isError: false,
+				userList: [],
+				isWin: false,
+				userHistory: []
+			},
+			methods: {
+				generate: function(){
+					var lucky = '';
+					var num = 4;
+
+					for (var i = 1; i <= num; i++) {
+						var ran = Math.floor(Math.random() * 10);
+						if(lucky.indexOf(ran) == -1){
+							lucky = lucky.concat(ran);
+						}else{
+							i--;
+						}
+					}
+					this.lucky = lucky;
+					alert(this.lucky);
+				},
+				generateResult: function(){
+					this.validateUserInput();
+
+					if(!this.isError){
+						this.guessCount++;
+						this.userList.push(
+						{
+							'guest': this.userInput,
+							'result': this.getResult()
+						}
+						);
+						this.userInput = "";
+						this.checkIsWin(this.userList[this.userList.length - 1].result);
+					}
+				},
+				validateUserInput: function(){
+					if(/[0-9]{4}/.test(this.userInput)){
+						this.isError = false;
+					}else{
+						this.isError = true;
+						return false;
+					}
+      				// array no repeat char, https://stackoverflow.com/questions/33656708/check-for-repeated-characters-in-a-string-javascript
+      				var userInputArray = this.userInput.split("");
+      				var result = userInputArray.some(function(v,i,a){
+      					return a.lastIndexOf(v)!=i;
+      				});
+      				if(!result){
+      					this.isError = false;
+      				}else{
+      					this.isError = true;
+      					return false;
+      				}
+  				},
+				getResult: function(){
+				    var a = 0;
+				    var b = 0;
+				      
+				    for(var i = 0; i < this.userInput.length; i++){
+				    	if(this.userInput.charAt(i) == this.lucky.charAt(i)){
+				    		a++;
+				      		continue;
+				      	}
+				      	if(this.lucky.indexOf(this.userInput.charAt(i)) != -1){
+				      		b++;
+				      		continue;
+				      	}
+				    }
+				    if(a == 0 && b == 0){
+				      	return 'X';
+				    }
+				    return a + 'A' + b + 'B';
+				},
+				checkIsWin: function(str){
+					if(str == "4A0B"){
+						this.isWin = true;
+						this.userHistory.push(
+						{
+							'count': this.guessCount
+						}
+						);
+					}
+				},
+				changeZIndexTo: function(objName, goalZIndex){
+					var obj = document.getElementById(objName);
+					obj.style.zIndex = goalZIndex;
+					this.guessCount = 0;
+					this.userList = [];
+					this.isWin = false;
+					if(goalZIndex == -1){
+						this.generate();
+					}
+				}
+			},
+			created: function(){
+				// this.generate();
+			}
+		});
+</script>
+</body>
+</html>
