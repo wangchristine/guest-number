@@ -1,0 +1,153 @@
+body {
+  background-color: #fff3f3;
+  text-align: center;
+  font-size: 26px;
+  font-family: 'Pacifico', cursive;
+}
+
+#app {
+  /* position: relative; */
+}
+
+#menu {
+  z-index: 2;
+  position: fixed;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+  background: url('http://www.sj520.cn/sc/ima/20170210223509_39519.jpg') no-repeat;
+  background-size: cover;
+}
+
+.menu-container {
+  position: relative;
+  left: 5vw;
+  top: 5vh;
+  width: 90vw;
+  height: 90vh;
+  background: url('https://fabrika-antey.ru/images/fries-clipart-logo-2.png') no-repeat center;
+  background-size: contain;
+}
+
+.menu-title {
+  font-size: 2em;
+  text-shadow: 2px 2px #000000;
+  color: #ffffff;
+}
+
+.menu-item {
+  position: absolute;
+  width: 160px;
+  height: 80px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: url('http://cdn.htmlgames.com/DailyMahjong/img/button.png') no-repeat center;
+  background-size: 100% 100%;
+}
+
+.menu-item.history-score {
+  top: 38vh;
+}
+
+.menu-item.play-game {
+  top: 62vh;
+}
+
+@media (max-width: 400px) {
+  .menu-title {
+    font-size: 1.5em;
+  }
+
+  .menu-item {
+    width: 160px;
+    height: 13vw;
+  }
+
+  .menu-item.history-score {
+    top: 39vh;
+  }
+
+  .menu-item.play-game {
+    top: 58vh;
+  }
+}
+
+.menu-item:hover {
+  transform: translate(-50%, -50%) scale(1.2);
+  transition: transform 0.2s;
+}
+
+#game {
+  z-index: 1;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  background: url('http://pic.51yuansu.com/pic3/cover/02/30/92/59c0798dec900_610.jpg') no-repeat center;
+  background-size: cover;
+}
+
+.fireworks {
+  position: fixed;
+  left: 25vw;
+  top: 15vh;
+  width: 50vw;
+  height: 70vh;
+  color: #ff2d2d;
+  font-size: 1.2em;
+  border: 5px #ffffff dashed;
+  box-shadow: 0 0 25px #ffffff;
+  background: url('https://media.giphy.com/media/vuXIybFbgwoWQ/giphy.gif') no-repeat center #040404;
+  background-size: contain;
+  /*other fireworks
+  https://thumbs.gfycat.com/UnitedUnevenAnt-small.gif
+  https://i.gifer.com/YZMG.gif
+  https://i.gifer.com/YtNM.gif
+  http://bestanimations.com/Holidays/Fireworks/fireworks/ba-pretty-delicate-firework-animated-gif-image.gif
+  https://img1.picmix.com/output/stamp/normal/0/2/3/4/534320_791f5.gif
+  https://unixtitan.net/images/vector-gif-firework-6.gif*/
+}
+
+.header {
+  margin: 20px;
+  padding: 10px;
+}
+
+.home-btn {
+  position: fixed;
+  top: 7vh;
+  left: 5vw;
+  width: 20vw;
+  height: 50px;
+  background: url('https://www.pngkey.com/png/full/369-3693368_homepage-button-png-home-button-game-png.png') no-repeat center;
+  background-size: contain;
+}
+
+.home-btn:hover {
+  transform: scale(1.2);
+  transition: transform 0.2s;
+}
+
+.header-title {
+  font-size: 2em;
+  padding: 20px;
+}
+
+.header-content {
+  padding: 10px;
+  line-height: 25px;
+  border: 5px solid #ffffff;
+  border-radius: 8px;
+}
+
+.user-history {
+  margin: 15px 60px;
+  padding: 30px;
+  line-height: 35px;
+  letter-spacing: 3px;
+  height: 35vh;
+  overflow-y: scroll;
+  border: 1px solid #000000;
+}
