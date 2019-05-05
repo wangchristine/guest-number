@@ -14,7 +14,7 @@
 				<div class="menu-title">
 					Guest Number
 				</div>
-				<div class="menu-item history-score">
+				<div class="menu-item history-score" @click="changeZIndexTo('history', 5);">
 					history
 				</div>
 				<div class="menu-item play-game" @click="changeZIndexTo('menu', -1);">
@@ -23,30 +23,50 @@
 			</div>
 		</div>
 		<div id="game">
-			<div class="fireworks" v-if="isWin">
-				You Win The Game!
-			</div>
 			<div class="header">
-				<div class="home-btn" @click="changeZIndexTo('menu', 2);"></div>
+				<div class="home-btn" @click="changeZIndexTo('menu', 4);"></div>
 				<div class="header-title">
 					<!-- {{ lucky }}<br> -->
 					Guess
 				</div>
 				<div class="header-content">
 					guess count: {{ guessCount }}<br>
-					<input type="text" maxlength="4" size="4" v-model="userInput">
+					<input type="text" class="user-input" maxlength="4" size="4" v-model="userInput" @keypress.13="generateResult()">
 					<!-- 預計用一個填，每個數字中間用style 隔開，在設計個倒退鍵(可選)-->
-					<button @click="generateResult">go</button>
+					<!-- <button @click="generateResult">go</button> -->
+					<div class="go-btn" @click="generateResult"></div>
 				</div>
 				<div class="error-message" v-if="isError">
 					non correct number
 				</div>
 			</div>
 			<div class="user-history">
-				<div v-for="item in this.userList">
+				<div class="history-item" v-for="item in this.userList">
 					{{ item.guest }} {{ item.result }}
 				</div>
 			</div>
+			<div class="fireworks" v-if="isWin">
+				You Win The Game!
+			</div>
+		</div>
+		<div id="history">
+			<div class="history-container">
+				<div class="history-title">
+					History
+				</div>
+				<div class="history-content">
+					time & count
+					<div class="history-list">
+						<div v-if="userHistory.length == 0">
+							No record yet.
+						</div>
+						<div v-else v-for="(history, key) in userHistory">
+							{{ key + 1 }} {{ history.count }}
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="home-btn" @click="changeZIndexTo('history', 2);"></div>
 		</div>
 	</div>
 
