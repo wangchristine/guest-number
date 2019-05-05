@@ -10,15 +10,18 @@
 <body>
 	<div id="app">
 		<div id="menu">
+			<div class="menu-title">
+				Guest Number
+			</div>
 			<div class="menu-container">
-				<div class="menu-title">
-					Guest Number
+				<div class="menu-item how-to-play" @click="changeZIndexTo('tutorial', 5);">
+					How To Play
 				</div>
 				<div class="menu-item history-score" @click="changeZIndexTo('history', 5);">
-					history
+					History
 				</div>
 				<div class="menu-item play-game" @click="changeZIndexTo('menu', -1);">
-					play!
+					Play!
 				</div>
 			</div>
 		</div>
@@ -32,8 +35,6 @@
 				<div class="header-content">
 					guess count: {{ guessCount }}<br>
 					<input type="text" class="user-input" maxlength="4" size="4" v-model="userInput" @keypress.13="generateResult()">
-					<!-- 預計用一個填，每個數字中間用style 隔開，在設計個倒退鍵(可選)-->
-					<!-- <button @click="generateResult">go</button> -->
 					<div class="go-btn" @click="generateResult"></div>
 				</div>
 				<div class="error-message" v-if="isError">
@@ -67,6 +68,18 @@
 				</div>
 			</div>
 			<div class="home-btn" @click="changeZIndexTo('history', 2);"></div>
+		</div>
+		<div id="tutorial">
+			<div class="tutorial-container">
+				<div class="tutorial-title">
+					Tutorial
+				</div>
+				<div class="tutorial-content">
+					Matching digits are in the right positions➜A<br><br>
+					If in different positions➜B
+				</div>
+			</div>
+			<div class="home-btn" @click="changeZIndexTo('tutorial', 1);"></div>
 		</div>
 	</div>
 
