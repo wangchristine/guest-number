@@ -28,6 +28,7 @@
 		<div id="game">
 			<div class="header">
 				<div class="home-btn" @click="changeZIndexTo('menu', 4);"></div>
+				<div class="book-btn" @click="getlucky();"></div>
 				<div class="header-title">
 					<!-- {{ lucky }}<br> -->
 					Guess
@@ -110,7 +111,6 @@
 						}
 					}
 					this.lucky = lucky;
-					alert(this.lucky);
 				},
 				generateResult: function(){
 					this.validateUserInput();
@@ -184,6 +184,9 @@
 					if(goalZIndex == -1){
 						this.generate();
 					}
+				},
+				getlucky: function(){
+					alert(this.lucky);
 				}
 			},
 			created: function(){

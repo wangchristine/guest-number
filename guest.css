@@ -141,6 +141,21 @@ body {
   transition: transform 0.2s;
 }
 
+.book-btn {
+  position: absolute;
+  top: 7vh;
+  right: 10vw;
+  width: 10vw;
+  height: 50px;
+  background: url('img/book-btn.png') no-repeat center;
+  background-size: contain;
+}
+
+.book-btn:hover {
+  transform: scale(1.2);
+  transition: transform 0.2s;
+}
+
 .header-title {
   font-size: 2em;
   color: #ffe0a5;
