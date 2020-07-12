@@ -9,6 +9,7 @@
 </head>
 <body>
 	<div id="app">
+		<div id="prepare-page"></div>
 		<div id="menu">
 			<div class="menu-title">
 				Guest Number
@@ -84,6 +85,7 @@
 		</div>
 	</div>
 
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script type="text/javascript" src="https://unpkg.com/vue@2.6.11/dist/vue.min.js"></script>
 	<script type="text/javascript">
 		var app = new Vue({
@@ -189,8 +191,9 @@
 					alert(this.lucky);
 				}
 			},
-			created: function(){
+			mounted: function(){
 				// this.generate();
+				$('#prepare-page').fadeOut("slow");
 			}
 		});
 </script>
